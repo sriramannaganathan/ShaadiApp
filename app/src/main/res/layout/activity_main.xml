@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="adapter"
+            type="com.pravinkumarp.shadiassignment.ui.invitation.InvitationsAdapter" />
+        <variable
+            name="viewModel"
+            type="com.pravinkumarp.shadiassignment.ui.invitation.InvitationViewModel" />
+        <variable
+            name="view"
+            type="android.view.View" />
+        <variable
+            name="ApiResponse"
+            type="com.pravinkumarp.shadiassignment.extension.ApiResponse" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.invitation.InvitationsActivity"
+        android:background="#F1F1F3">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            bind:adapter="@{adapter}"
+            bind:items="@{viewModel.invitationList.toData()}"
+            android:visibility="@{viewModel.isLoading()? view.GONE : view.VISIBLE}"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{!viewModel.isLoading()? view.GONE : view.VISIBLE}"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="invitation"
+            type="com.pravinkumarp.shadiassignment.model.Matches.Invitation" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ivInvitationProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/female_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:loadImageFromInvitation="@{invitation}" />
+
+            <TextView
+                android:id="@+id/tvInvitationTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24 Feb"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:toSmallDate="@{invitation.registered.date}" />
+
+            <TextView
+                android:id="@+id/tvInvitationProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@{invitation.name.first + ' ' + invitation.name.last}"
+                android:textColor="#7CCEE0"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivInvitationProfile" />
+
+            <TextView
+                android:id="@+id/tvInvitationProfileAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInvitationProfileName"
+                bind:invitationDescription="@{invitation}" />
+
+
+            <Button
+                android:id="@+id/btInvitationDecline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#B0B0B6"
+                android:text="Decline"
+                app:layout_constraintEnd_toStartOf="@+id/btInvitationAccept"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInvitationProfileAddress" />
+
+            <Button
+                android:id="@+id/btInvitationAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Accept"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btInvitationDecline"
+                app:layout_constraintTop_toBottomOf="@+id/tvInvitationProfileAddress" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupInvitationActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="btInvitationAccept,btInvitationDecline"
+                bind:show="@{invitation.status == 0}" />
+
+            <TextView
+                android:id="@+id/tvInvitationStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="@{invitation.statusText}"
+                android:textColor="@color/purple_500"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInvitationProfileAddress"
+                bind:show="@{invitation.status != 0}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
